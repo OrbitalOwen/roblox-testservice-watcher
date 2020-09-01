@@ -21,6 +21,8 @@ return {
 }
 ```
 
+Changes made to `__WatcherDirectories` will take effect immediately (ie. it is not cached).
+
 ## Installation Guide
 
 You can build this plugin into an `rbxmx` using `rojo build --output roblox-testservice-watcher.rbxmx`.
