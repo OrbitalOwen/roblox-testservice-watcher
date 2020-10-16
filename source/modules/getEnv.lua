@@ -16,5 +16,18 @@ return function(scriptRelativeTo)
 
     newEnv.script = scriptRelativeTo
 
+    local realDebug = debug
+
+    newEnv.debug =
+        setmetatable(
+        {
+            traceback = function(message)
+                -- Block traces to prevent overly verbose TestEZ output
+                return message or ""
+            end
+        },
+        {__index = realDebug}
+    )
+
     return newEnv
 end

@@ -1,3 +1,5 @@
+> :warning: **This is hacky**: The method leveraged here is temporary until a better method of cache busting modules exits.
+
 # roblox-testservice-watcher
 
 This is a Roblox Studio plugin to automatically run unit tests within Studio when a script in a watched directory is changed, with a fresh `ModuleScript` require cache.
