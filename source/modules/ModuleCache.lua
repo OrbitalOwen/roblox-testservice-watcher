@@ -18,7 +18,11 @@ local function accessModule(moduleScript)
     local success = returnValues[1]
     local result = returnValues[2]
 
-    assert(success, "Requested module experienced an error while loading")
+    assert(
+        success,
+        "Requested module experienced an error while loading MODULE: " ..
+            moduleScript:GetFullName() .. " - RESULT: " .. tostring(result)
+    )
     assert(validateValues(returnValues), "Module code did not return exactly one value")
 
     return result
