@@ -1,4 +1,4 @@
-> :warning: **This is hacky**: The method leveraged here is temporary until a better method of cache busting modules exits.
+> :warning: **This is hacky**: The method leveraged here is temporary until a better method of cache busting modules exits. It doesn't work that well, is poorly put together and is an all around pain. Use with caution.
 
 # roblox-testservice-watcher
 
