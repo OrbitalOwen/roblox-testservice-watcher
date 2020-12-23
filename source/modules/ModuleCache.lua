@@ -1,4 +1,5 @@
 local getEnv = require(script.Parent.getEnv)
+local generateScriptHeader = require(script.Parent.generateScriptHeader)
 
 local cache = {}
 
@@ -37,7 +38,7 @@ function ModuleCache.require(moduleScript)
         return accessModule(moduleScript)
     end
 
-    local moduleFn = loadstring(moduleScript.Source)
+    local moduleFn = loadstring(generateScriptHeader(moduleScript) .. moduleScript.Source)
     local env = getEnv(moduleScript)
     env.require = ModuleCache.require
 

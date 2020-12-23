@@ -1,5 +1,4 @@
 local Watcher = require(script.Parent.Watcher)
-local runTests = require(script.Parent.runTests)
 
 local connection
 
