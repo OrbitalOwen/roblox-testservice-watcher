@@ -10,20 +10,22 @@ return function()
     local scripts = TestService:GetChildren()
 
     for _, scriptObject in ipairs(scripts) do
-        local scriptFn = loadstring(generateScriptHeader(scriptObject) .. scriptObject.Source)
+        if scriptObject:IsA("Script") then
+            local scriptFn = loadstring(generateScriptHeader(scriptObject) .. scriptObject.Source)
 
-        local env = getEnv(scriptObject)
-        env.require = ModuleCache.require
+            local env = getEnv(scriptObject)
+            env.require = ModuleCache.require
 
-        setfenv(scriptFn, env)
+            setfenv(scriptFn, env)
 
-        local success, result = pcall(scriptFn)
-        if not success then
-            local found = string.find(result, "%.%.%.\"]")
-            if found then
-                result = string.sub(result, found + 6)
+            local success, result = pcall(scriptFn)
+            if not success then
+                local found = string.find(result, "%.%.%.\"]")
+                if found then
+                    result = string.sub(result, found + 6)
+                end
+                TestService:Error(string.format("Error running: %s", result), scriptObject)
             end
-            TestService:Error(string.format("Error running: %s", result), scriptObject)
         end
     end
 end
