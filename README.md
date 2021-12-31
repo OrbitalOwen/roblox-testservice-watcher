@@ -27,10 +27,9 @@ Changes made to `__WatcherDirectories` will take effect immediately (ie. it is n
 
 ## Installation Guide
 
-You can build this plugin into an `rbxmx` using `rojo build --output roblox-testservice-watcher.rbxmx`.
+Download the plugin from the [asset library](ADD_URL_HERE) to have it managed in Studio.
 
-**TODO:** Build release `rbxmx` automatically using actions.
-**TODO:** Deploy automatically to Roblox plugin library using actions.
+You can also download the `rbxm` from the [releases page](https://github.com/OrbitalOwen/roblox-testservice-watcher/releases/latest).
 
 ## See also
 
