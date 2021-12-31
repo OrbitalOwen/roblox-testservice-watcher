@@ -10,72 +10,64 @@ local isEnabled = false
 local connection1, connection2
 
 if RunService:IsRunning() or not RunService:IsEdit() then
-    return
+	return
 end
 
 local function lookForDirectoriesModule()
-    local directoriesModule = TestService:FindFirstChild(DIRECTORIES_MODULE_NAME)
+	local directoriesModule = TestService:FindFirstChild(DIRECTORIES_MODULE_NAME)
 
-    if directoriesModule then
-        updateDirectories(directoriesModule)
-    end
+	if directoriesModule then
+		updateDirectories(directoriesModule)
+	end
 end
 
 local function enable()
-    if not isEnabled then
-        connection1 =
-            TestService.ChildAdded:Connect(
-            function(child)
-                if child.Name == DIRECTORIES_MODULE_NAME then
-                    updateDirectories(child)
-                end
-            end
-        )
+	if not isEnabled then
+		connection1 = TestService.ChildAdded:Connect(function(child)
+			if child.Name == DIRECTORIES_MODULE_NAME then
+				updateDirectories(child)
+			end
+		end)
 
-        connection2 =
-            TestService.ChildRemoved:Connect(
-            function(child)
-                if child.Name == DIRECTORIES_MODULE_NAME then
-                    Watcher.removeAll()
-                    lookForDirectoriesModule()
-                end
-            end
-        )
+		connection2 = TestService.ChildRemoved:Connect(function(child)
+			if child.Name == DIRECTORIES_MODULE_NAME then
+				Watcher.removeAll()
+				lookForDirectoriesModule()
+			end
+		end)
 
-        lookForDirectoriesModule()
+		lookForDirectoriesModule()
 
-        isEnabled = true
-    end
+		isEnabled = true
+	end
 end
 
 local function disable()
-    if isEnabled then
-        connection1:Disconnect()
-        connection2:Disconnect()
+	if isEnabled then
+		connection1:Disconnect()
+		connection2:Disconnect()
 
-        Watcher.removeAll()
+		Watcher.removeAll()
 
-        isEnabled = false
-    end
+		isEnabled = false
+	end
 end
 
 local function setupButton()
-    local toolbar = plugin:CreateToolbar("TestService Watcher")
-    local button = toolbar:CreateButton("Enable Watcher", "Enable TestService Watcher", "")
-    button.ClickableWhenViewportHidden = true
-    button:SetActive(isEnabled)
+	local toolbar = plugin:CreateToolbar("TestService Watcher")
+	local button = toolbar:CreateButton("Enable Watcher", "Enable TestService Watcher", "")
+	button.ClickableWhenViewportHidden = true
+	button:SetActive(isEnabled)
 
-    button.Click:Connect(
-        function()
-            if isEnabled then
-                disable()
-            else
-                enable()
-            end
+	button.Click:Connect(function()
+		if isEnabled then
+			disable()
+		else
+			enable()
+		end
 
-            button:SetActive(isEnabled)
-        end
-    )
+		button:SetActive(isEnabled)
+	end)
 end
 
 enable()
